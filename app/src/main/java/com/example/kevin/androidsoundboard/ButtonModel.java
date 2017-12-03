@@ -9,6 +9,7 @@ import java.util.UUID;
 public class ButtonModel  {
     private String id;
     private String text;
+    private int song;
     public ButtonModel(){
         this.id = UUID.randomUUID().toString();
     }
@@ -20,6 +21,12 @@ public class ButtonModel  {
     }
     public String getText(){
         return text;
+    }
+    public void setSong(int a){
+        this.song = a;
+    }
+    public int getSong(){
+        return song;
     }
 
 }

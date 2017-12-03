@@ -1,7 +1,11 @@
 package com.example.kevin.androidsoundboard;
 
+import android.media.MediaPlayer;
+
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 /**
  * Created by kevin on 11/23/2017.
@@ -9,6 +13,7 @@ import java.util.List;
 
 public class buttonlist {
     private static buttonlist list;
+
 
     public static buttonlist GetInstance(){
         if(list==null){
@@ -39,6 +44,17 @@ public class buttonlist {
         button8.setText("Oink");
         button9.setText("Baa");
         button10.setText("Hoot");
+        button1.setSong(R.raw.sound1);
+        button2.setSong(R.raw.sound2);
+        button3.setSong(R.raw.sound3);
+        button4.setSong(R.raw.sound4);
+        button5.setSong(R.raw.sound5);
+        button6.setSong(R.raw.sound6);
+        button7.setSong(R.raw.sound7);
+        button8.setSong(R.raw.sound8);
+        button9.setSong(R.raw.sound9);
+        button10.setSong(R.raw.sound10);
+
         this.buttons.add(button1);
         this.buttons.add(button2);
         this.buttons.add(button3);

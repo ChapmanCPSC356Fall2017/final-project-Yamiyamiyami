@@ -1,6 +1,9 @@
 package com.example.kevin.androidsoundboard;
 
+import android.app.Activity;
 import android.content.Context;
+import android.media.MediaPlayer;
+import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +15,7 @@ import android.widget.Button;
  */
 
 public class SoundAdapter extends RecyclerView.Adapter<SoundAdapter.SoundViewHolder>{
+
     @Override
     public SoundViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -20,9 +24,17 @@ public class SoundAdapter extends RecyclerView.Adapter<SoundAdapter.SoundViewHol
     }
 
     @Override
-    public void onBindViewHolder(SoundViewHolder holder, int position) {
+    public void onBindViewHolder(SoundViewHolder holder, final int position) {
         ButtonModel button = buttonlist.GetInstance().getButtons().get(position);
         holder.setup(button);
+        holder.bt_butt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MediaPlayer mp = MediaPlayer.create(view.getContext(), buttonlist.GetInstance().getButtons().get(position).getSong());
+                mp.start();
+
+            }
+        });
     }
 
     @Override
@@ -30,17 +42,17 @@ public class SoundAdapter extends RecyclerView.Adapter<SoundAdapter.SoundViewHol
         return buttonlist.GetInstance().getButtons().size();
     }
 
-    class SoundViewHolder extends RecyclerView.ViewHolder {
+    class SoundViewHolder extends RecyclerView.ViewHolder{
         private ButtonModel button;
         private Button bt_butt;
+
         public SoundViewHolder(View itemView) {
             super(itemView);
             this.bt_butt = itemView.findViewById(R.id.annoyRyan);
         }
-        public void setup(ButtonModel button){
+        public void setup(ButtonModel button) {
             this.button = button;
             this.bt_butt.setText(button.getText());
         }
-
     }
 }
