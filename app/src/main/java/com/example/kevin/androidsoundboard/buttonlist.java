@@ -45,7 +45,7 @@ public class buttonlist {
         button9.setText("Baa");
         button10.setText("Hoot");
         button1.setSong(R.raw.sound1);
-        button2.setSong(R.raw.sound2);
+        button2.setSong(R.raw.sound13);
         button3.setSong(R.raw.sound3);
         button4.setSong(R.raw.sound4);
         button5.setSong(R.raw.sound5);

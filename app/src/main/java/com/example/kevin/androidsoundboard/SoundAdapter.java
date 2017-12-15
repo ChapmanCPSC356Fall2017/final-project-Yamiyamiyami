@@ -3,6 +3,7 @@ package com.example.kevin.androidsoundboard;
 import android.app.Activity;
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,10 +29,26 @@ public class SoundAdapter extends RecyclerView.Adapter<SoundAdapter.SoundViewHol
         ButtonModel button = buttonlist.GetInstance().getButtons().get(position);
         holder.setup(button);
         holder.bt_butt.setOnClickListener(new View.OnClickListener() {
+        private long mLastClickTime = 0;
+        MediaPlayer mp = null;
+        int playing = 0;
             @Override
             public void onClick(View view) {
-                MediaPlayer mp = MediaPlayer.create(view.getContext(), buttonlist.GetInstance().getButtons().get(position).getSong());
-                mp.start();
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+                if(mp != null && mp.isPlaying()) {
+                    mp.stop();
+                    mp.reset();
+                    mp= MediaPlayer.create(view.getContext(), buttonlist.GetInstance().getButtons().get(position).getSong());
+                    mp.start();
+                    playing = 1;
+                }else{
+                    mp = MediaPlayer.create(view.getContext(), buttonlist.GetInstance().getButtons().get(position).getSong());
+                    mp.start();
+                }
+
 
             }
         });
